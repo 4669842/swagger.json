@@ -1,0 +1,281 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1",
+        "title": "Todo App"
+    },
+    "host": "localhost:3000",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json",
+        "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+        "application/x-www-form-urlencoded"
+    ],
+    "basePath": "/",
+    "paths": {
+        "/tasks": {
+            "get": {
+                "description": "Gets All `Task` objects.\n",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "ArrayOfTasks",
+                            "type": "array",
+                            "items": {
+                                "title": "Tasks",
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "task1"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Mow the lawn"
+                                    },
+                                    "date_created": {
+                                        "type": "string",
+                                        "example": "2015-06-03T23:49:18.059Z"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error",
+                        "schema": {
+                            "type": "string",
+                            "example": "Cannot find Tasks"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Add 'Task' object.\n",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "The name and description of your new task",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/task"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "Return String",
+                            "type": "string",
+                            "example": "Task added succesfully"
+                        }
+                    },
+                    "500": {
+                        "description": "Error",
+                        "schema": {
+                            "type": "string",
+                            "example": "Could not add Task"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update `Task` object.\n\n # This is array of GET operation parameters:\n",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "unique object id, task name and description",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/task"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "Return String",
+                            "type": "string",
+                            "example": "Task updated succesfully"
+                        }
+                    },
+                    "500": {
+                        "description": "Error",
+                        "schema": {
+                            "type": "string",
+                            "example": "Could not update Task"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete `Task` object.\n\n # This is array of GET operation parameters:\n",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "unique object id",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/task"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "Return String",
+                            "type": "string",
+                            "example": "Task removed succesfully"
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "schema": {
+                            "type": "string",
+                            "example": "Cannot find Task"
+                        }
+                    }
+                }
+            }
+        },
+        "/tasks/{id}": {
+            "get": {
+                "description": "Gets `Task` object by id.\n\n # This is array of GET operation parameters:\n",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "unique object id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "TaskObject",
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "example": "1"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "example": "task1"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "example": "Mow the lawn"
+                                },
+                                "date_created": {
+                                    "type": "string",
+                                    "example": "2015-06-03T23:49:18.059Z"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error",
+                        "schema": {
+                            "type": "string",
+                            "example": "Cannot find Task"
+                        }
+                    }
+                }
+            }
+        },
+        "/search": {
+            "get": {
+                "description": "Gets `Task` object by id.\n\n # This is array of GET operation parameters:\n",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "unique task object name",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "title": "TaskObject",
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "example": "1"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "example": "task1"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "example": "Mow the lawn"
+                                },
+                                "date_created": {
+                                    "type": "string",
+                                    "example": "2015-06-03T23:49:18.059Z"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error",
+                        "schema": {
+                            "type": "string",
+                            "example": "Cannot find Task"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "task": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "date_created": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
